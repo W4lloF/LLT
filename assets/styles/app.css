@@ -4,27 +4,25 @@
     box-sizing: border-box;
     list-style-type: none;
     font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-a {
     color: #fff;
     text-decoration: none;
 }
 
 body,
 html {
-    height: 100%;
-    background: linear-gradient(to bottom, #0E0E0E, #780000);
+    height: 100%
 }
 
 .page {
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(to bottom, #0E0E0E, #780000);
 }
 
 main {
     flex: 1;
+    margin-top: 10vh;
 }
 
 .bar {
@@ -32,15 +30,13 @@ main {
     position: fixed;
     z-index: 99;
     width: 100%;
-    height: 10vh;
     top: 0;
 }
 
 .barfooter {
     width: 100%;
-    height: 10vh;
     z-index: 99;
-    border-top: #fff solid 1px;
+    border-top: 1px solid #fff;
 }
 
 .logo {
@@ -49,7 +45,7 @@ main {
 
 .navbar {
     display: flex;
-    gap: 20px;
+    gap: 24px;
     align-items: center;
     height: 10vh;
     font-size: 24px;
@@ -60,10 +56,10 @@ main {
     font-size: 16px;
     font-weight: 400;
     margin-left: 30px;
-    gap: 30px;
+    gap: 32px;
 }
 
-.btn-sign {
+.btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,11 +73,11 @@ main {
 }
 
 .li-right2 {
-    margin-right: 20px;
+    margin-right: 24px;
 }
 
-.li-right2-footer{
-    margin-right: 30px;
+.li-right2-footer {
+    margin-right: 32px;
 }
 
 .signin {
@@ -89,6 +85,122 @@ main {
     border: 1px solid #fff;
 }
 
-.socials {
+svg {
     color: #fff;
+}
+
+section {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    min-height: 75vh;
+}
+
+H1 {
+    font-size: 64px;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.text {
+    font-size: 32px;
+    width: 70vw;
+    text-align: center;
+}
+
+.coachsul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.allcoach {
+    width: 55vw;
+    height: 60vh;
+    font-size: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coachdiv {
+    display: flex;
+    gap: 5vw;
+    align-items: center;
+}
+
+.coach {
+    background-color: #1A1A1A;
+    width: 20vw;
+    height: 50vh;
+    border-radius: 5%;
+}
+.imgcoach{
+    height: 50%;
+    border-bottom: solid 1px #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgbackground{
+    width: 12rem;          /* ou 8rem / 15vh selon ton design */
+    height: 12rem;
+    border-radius: 50%;
+    background-image: url('/img/kkoma.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1px solid #fff; /* optionnel */
+}
+h3{
+    font-size: 24px;
+    font-weight: 600;
+}
+.infocoach{
+    height: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 1rem;
+}
+.fr-flag{
+    width: 32px;
+    height: auto;
+}
+p{
+    font-size: 16px;
+}
+.video{
+    height: 45vh;
+    width: 35vw;
+    background-color: #1A1A1A;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+.video h3{
+    width: 100%;
+    text-align: center;
+}
+.subscriptiontext{
+    font-size: 48px;
+    width: 30vw;
+    text-align: center;
+}
+
+.join{
+    background-color: #1A1A1A;
+    font-size:32px;
 }
