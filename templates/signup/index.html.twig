@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SecurityController!{% endblock %}
+{% block title %}Hello SignupController!{% endblock %}
 
 {% block body %}
 <section>
     <h2>Inscription</h2>
-    <form id="signin-form" action="signin.php" method="get">
+    <form id="signup-form" action="signup.php" method="get">
+        <div class="divform">
+            <label id="lbl_pseudo" for="pseudo">Pseudo</label>
+            <input class="input" id="pseudo" name="pseudo" type="text">
+        </div>
         <div class="divform">
             <label id="lbl_email" for="email">Email</label>
             <input class="input" id="email" name="email" type="mail">
@@ -18,7 +22,7 @@
     </form>
     <div>
         <label></label>
-        <input class="btn btnform" id="signin" name="signin" type="submit" value="S'inscrire">
+        <input class="btn btnform" id="signup" name="signup" type="submit" value="S'inscrire">
     </div>
 </section>
 {% endblock %}

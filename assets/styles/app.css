@@ -10,7 +10,8 @@
 
 body,
 html {
-    height: 100%
+    height: 100%;
+    font-variant-ligatures: none;
 }
 
 .page {
@@ -139,9 +140,10 @@ h2 {
     background-color: #1A1A1A;
     width: 20vw;
     height: 50vh;
-    border-radius: 5%;
+    border-radius: 15px;
 }
-.imgcoach{
+
+.imgcoach {
     height: 50%;
     border-bottom: solid 1px #fff;
     display: flex;
@@ -149,21 +151,25 @@ h2 {
     align-items: center;
 }
 
-.imgbackground{
-    width: 12rem;          /* ou 8rem / 15vh selon ton design */
+.imgbackground {
+    width: 12rem;
+    /* ou 8rem / 15vh selon ton design */
     height: 12rem;
     border-radius: 50%;
     background-image: url('/img/kkoma.jpeg');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    border: 1px solid #fff; /* optionnel */
+    border: 1px solid #fff;
+    /* optionnel */
 }
-h3{
+
+h3 {
     font-size: 24px;
     font-weight: 600;
 }
-.infocoach{
+
+.infocoach {
     height: 50%;
     display: flex;
     justify-content: space-evenly;
@@ -173,14 +179,17 @@ h3{
     text-align: center;
     margin: 0 1rem;
 }
-.fr-flag{
+
+.fr-flag {
     width: 32px;
     height: auto;
 }
-p{
+
+p {
     font-size: 16px;
 }
-.video{
+
+.video {
     height: 45vh;
     width: 35vw;
     background-color: #1A1A1A;
@@ -189,18 +198,165 @@ p{
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
+    padding: 1.5rem;
 }
-.video h3{
+
+.video h3 {
     width: 100%;
     text-align: center;
 }
-.subscriptiontext{
+
+.subscriptiontext {
     font-size: 48px;
     width: 30vw;
     text-align: center;
 }
 
-.join{
+.join {
     background-color: #1A1A1A;
-    font-size:32px;
+    font-size: 32px;
+}
+
+form {
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 1rem;
+    min-height: 20rem;
+    min-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.divform {
+    gap: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label {
+    font-size: 32px;
+}
+
+.input {
+    background-color: transparent;
+    border: 1px solid #fff;
+    width: 14rem;
+    font-size: 24px;
+}
+
+.btnform {
+    font-size: 32px;
+    background-color: #1A1A1A;
+    border: none;
+    border-radius: 5px;
+}
+
+.booknow {
+    font-size: 24px;
+    background-color: #1A1A1A;
+}
+
+.coachpage {
+    width: 35rem;
+    height: 40rem;
+}
+
+.imgcoaching {
+    height: 40%;
+}
+
+.infocoaching {
+    height: 60%;
+}
+
+.coachsection {
+    flex-direction: row;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    gap: 3rem;
+    height: 50rem;
+    padding: 3rem;
+    margin-top: 5rem;
+    justify-content: space-evenly;
+}
+
+.coachsection::-webkit-scrollbar {
+    display: none;
+}
+
+.divvideo {
+    width: 80%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+}
+
+.iframepage {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.calendardiv{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calendarsection{
+
+    height: 80vh;
+    align-content: center;
+}
+option{
+    background-color: #1A1A1A;
+}
+.sub{
+    font-size: 32px;
+    height: 3rem;
+    margin-bottom: 1rem;
+}
+
+.ulsub{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 70%;
+}
+.subdiv2{
+    height: 100%;
+    font-size: 24px;
+}
+.price, .time{
+    font-size: 24px;
+    font-weight: 600;
+}
+.time{
+    margin-top: 1rem;
+}
+.ulsub>li{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.delete, .profilebtn{
+    font-size: 24px;
+}
+.profilebtn{
+    border:1px solid #fff;
+    background-color: #1A1A1A;
+}
+.profilediv{
+    height: 60vh;
+    min-width: 30vw;
+}
+.ulprofile{
+    font-size: 24px;
+    text-align: center;
+    height: 100%;
+}
+#signin-form{
+    min-height: 15rem;
 }
