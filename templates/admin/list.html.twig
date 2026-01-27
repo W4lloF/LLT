@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<section class="table-section">
+    <h2>{{ title|default('Liste') }}</h2>
+
+    <div class="table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Statut</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Exemple 1</td>
+                    <td>
+                        <a href="#" class="btn btn-border">Voir</a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn">Supprimer</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Exemple 2</td>
+                    <td>
+                        <a href="#" class="btn btn-border">Voir</a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn">Supprimer</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

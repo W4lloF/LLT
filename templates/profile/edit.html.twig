@@ -3,26 +3,29 @@
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block body %}
-<section>
+<section class="form-section">
     <h2>Modifier</h2>
-    <form id="signup-form" action="signup.php" method="get">
-        <div class="divform">
-            <label id="lbl_pseudo" for="pseudo">Pseudo</label>
-            <input class="input" id="pseudo" name="pseudo" type="text">
-        </div>
-        <div class="divform">
-            <label id="lbl_email" for="email">Email</label>
-            <input class="input" id="email" name="email" type="mail">
+    <form id="edit-form" action="{{ path('app_edit') }}" method="post">
+        <div class="form-card">
+            <div class="div-form">
+                <label for="pseudo">Pseudo</label>
+                <input class="input-form" id="pseudo" name="pseudo" type="text" required>
+            </div>
+            <div class="div-form">
+                <label for="email">Email</label>
+                <input class="input-form" id="email" name="email" type="email" required>
 
+            </div>
+            <div class="div-form">
+                <label for="password">Mot de passe</label>
+                <input class="input-form" id="password" name="password" type="password" required
+                    autocomplete="current-password">
+            </div>
         </div>
-        <div class="divform">
-            <label id="lbl_password" for="password">Mot de passe</label>
-            <input class="input" id="password" name="password" type="password" required autocomplete="current-password">
+        <div class="submit-div">
+            <label></label>
+            <input class="btn btn-form" id="edit" name="edit" type="submit" value="Modifier profil">
         </div>
     </form>
-    <div>
-        <label></label>
-        <input class="btn btnform" id="signup" name="signup" type="submit" value="Modifier">
-    </div>
 </section>
 {% endblock %}

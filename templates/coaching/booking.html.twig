@@ -5,41 +5,44 @@
     <h2>
         Booking
     </h2>
-    <form id="signup-form" action="signup.php" method="get">
-        <div class="divform">
-            <label id="lbl_Mois" for="Mois">Mois</label>
-            <select class="input" name="time" id="time">
-                <option value="Janvier">Janvier</option>
-                <option value="Fevrier">Février</option>
-                <option value="Mars">Mars</option>
-                <option value="Avril">Avril</option>
-                <option value="Mai">Mai</option>
-            </select>
+    <form action="{{ path('app_signup') }}" method="get">
+        <div class="form-card">
+            <div class="div-form">
+                <label for="Mois">Mois</label>
+                <select class="input-form" name="month" id="month">
+                    <option value="Janvier">Janvier</option>
+                    <option value="Fevrier">Février</option>
+                    <option value="Mars">Mars</option>
+                    <option value="Avril">Avril</option>
+                    <option value="Mai">Mai</option>
+                </select>
+            </div>
+            <div class="div-form">
+                <label for="Jours">Jours</label>
+                <select class="input-form" name="day" id="day">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="div-form">
+                <label for="Heure">Horaire</label>
+                <select class="input-form" name="time" id="time">
+                    <option value="13h">13h00</option>
+                    <option value="14h">14h00</option>
+                    <option value="15h">15h00</option>
+                    <option value="16h">16h00</option>
+                    <option value="17h">17h00</option>
+                </select>
+            </div>
         </div>
-        <div class="divform">
-            <label id="lbl_Jours" for="Jours">Jours</label>
-            <select class="input" name="time" id="time">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </div>
-        <div class="divform">
-            <label id="lbl_Heure" for="Heure">Horaire</label>
-            <select class="input" name="time" id="time">
-                <option value="13h">13h00</option>
-                <option value="14h">14h00</option>
-                <option value="15h">15h00</option>
-                <option value="16h">16h00</option>
-                <option value="17h">17h00</option>
-            </select>
+        <div class="submit-div">
+            <label></label>
+            <input class="btn btn-form" id="signup" name="signup" type="submit" value="Demander un coaching">
         </div>
     </form>
-    <div>
-        <label></label>
-        <input class="btn btnform" id="signup" name="signup" type="submit" value="Se connecter">
-    </div>
+
 </section>
 {% endblock %}

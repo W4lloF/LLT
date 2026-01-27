@@ -15,14 +15,14 @@ final class CoachingController extends AbstractController
             'controller_name' => 'CoachingController',
         ]);
     }
-    #[Route('/coaching/planning', name: 'app_coaching')]
+    #[Route('/coaching/planning', name: 'app_planning')]
     public function planning(): Response
     {
         return $this->render('coaching/planning.html.twig', [
             'controller_name' => 'CoachingController',
         ]);
     }
-    #[Route('/coaching/planning/booking', name: 'app_coaching')]
+    #[Route('/coaching/planning/booking', name: 'app_booking')]
     public function booking(): Response
     {
         return $this->render('coaching/booking.html.twig', [

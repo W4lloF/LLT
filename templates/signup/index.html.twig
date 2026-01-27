@@ -3,26 +3,29 @@
 {% block title %}Hello SignupController!{% endblock %}
 
 {% block body %}
-<section>
+<section class="form-section">
     <h2>Inscription</h2>
-    <form id="signup-form" action="signup.php" method="get">
-        <div class="divform">
-            <label id="lbl_pseudo" for="pseudo">Pseudo</label>
-            <input class="input" id="pseudo" name="pseudo" type="text">
-        </div>
-        <div class="divform">
-            <label id="lbl_email" for="email">Email</label>
-            <input class="input" id="email" name="email" type="mail">
+    <form id="signup-form" action="{{ path('app_signup') }}" method="post">
+        <div class="form-card">
+            <div class="div-form">
+                <label for="pseudo">Pseudo</label>
+                <input class="input-form" id="pseudo" name="pseudo" type="text" required>
+            </div>
+            <div class="div-form">
+                <label for="email">Email</label>
+                <input class="input-form" id="email" name="email" type="email" required>
 
+            </div>
+            <div class="div-form">
+                <label for="password">Mot de passe</label>
+                <input class="input-form" id="password" name="password" type="password" required
+                    autocomplete="current-password">
+            </div>
         </div>
-        <div class="divform">
-            <label id="lbl_password" for="password">Mot de passe</label>
-            <input class="input" id="password" name="password" type="password" required autocomplete="current-password">
+        <div class="submit-div">
+            <label></label>
+            <input class="btn btn-form" id="signup" name="signup" type="submit" value="S'inscrire">
         </div>
     </form>
-    <div>
-        <label></label>
-        <input class="btn btnform" id="signup" name="signup" type="submit" value="S'inscrire">
-    </div>
 </section>
 {% endblock %}

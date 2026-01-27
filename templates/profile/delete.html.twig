@@ -1,19 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Hello SecurityController!{% endblock %}
 
 {% block body %}
-<section>
-    <h2>Inscription</h2>
-    <form id="signin-form" action="signin.php" method="get">
-        <div class="divform">
-            <label id="lbl_password" for="password">Mot de passe</label>
-            <input class="input" id="password" name="password" type="password" required autocomplete="current-password">
+<section class="form-section">
+    <h2>Suppression</h2>
+    <form id="delete-form" action="" method="post">
+        <div class="form-card delete-form">
+            <div class="div-form">
+                <label for="email">Email</label>
+                <input class="input-form" id="email" name="email" type="email" required>
+
+            </div>
+            <div class="div-form">
+                <label for="password">Mot de passe</label>
+                <input class="input-form" id="password" name="password" type="password" required
+                    autocomplete="current-password">
+            </div>
+        </div>
+        <div class="submit-div">
+            <label></label>
+            <input class="btn btn-form" id="delete" name="delete" type="submit" value="Supprimer profil">
         </div>
     </form>
-    <div>
-        <label></label>
-        <input class="btn btnform" id="delete" name="delete" type="submit" value="Supprimer profil">
-    </div>
 </section>
 {% endblock %}
