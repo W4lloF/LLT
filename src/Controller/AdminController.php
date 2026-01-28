@@ -220,7 +220,7 @@ final class AdminController extends AbstractController
 
         return $this->redirectToRoute('app_list');
     }
-    #[Route('/admin/coachings', name: 'app_coachinglist')]
+    #[Route('/admin/coachings', name: 'app_coachingslist')]
     public function listCoachingsWaiting(CoachingRepository $coachingRepository): Response
     {
         $coachings = $coachingRepository->findBy(['status' => 'waiting']);
@@ -243,7 +243,7 @@ final class AdminController extends AbstractController
         return $this->redirectToRoute('app_coachingslist');
     }
 
-    #[Route('/admin/coachings/delete/choose', name: 'app_coachinggetid_delete')]
+    #[Route('/admin/coachings/delete/choose', name: 'app_gecoachingtid_delete')]
     public function GetIDCoachingDelete(Request $request): Response
     {
         $form = $this->createForm(\App\Form\GetCoachingIDType::class);
@@ -254,7 +254,7 @@ final class AdminController extends AbstractController
             return $this->redirectToRoute('app_coachingsdelete', ['id' => $id]);
         }
 
-        return $this->render('admin/GetIDCoachingDelete.html.twig', [
+        return $this->render('admin/coachingdelete.html.twig', [
             'form' => $form->createView(),
         ]);
     }

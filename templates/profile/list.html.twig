@@ -24,7 +24,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.registrationDate ? user.registrationDate|date('d/m/Y H:i') : '-' }}</td>
                     <td>
-                        <a href="{{ path('app_feedbackcreate', {'id': user.id}) }}" class="btn btn-border">
+                        <a href="{{ path('app_createfeedback', {'id': user.id}) }}" class="btn btn-border">
                             Faire un feedback
                         </a>
                     </td>

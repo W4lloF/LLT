@@ -27,7 +27,7 @@ security:
 
     access_control:
         - { path: ^/profile/coach, roles: [ROLE_COACH, ROLE_ADMIN] }
-        - { path: ^/admin/videolist/add, roles: ROLE_COACH }
+        - { path: ^/admin/videolist/add, roles: [ROLE_COACH, ROLE_ADMIN] }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }
 

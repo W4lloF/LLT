@@ -9,44 +9,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const left = document.querySelector(".leftarrow");
     const right = document.querySelector(".rightarrow");
     const cards = document.querySelectorAll(".card");
-    let i = 0;
-    let y = getStep();
 
-    open.addEventListener('click', () => {
-        menuul.classList.add("open")
-    });
-    close.addEventListener('click', () => {
-        menuul.classList.remove("open")
-    });
-
-
-
-    function getStep() {
-        return window.innerWidth >= 1200 ? 35 : 60;
+    if (open && menuul) {
+        open.addEventListener('click', () => {
+            menuul.classList.add("open");
+        });
     }
 
-    function move() {
-        wrapper.style.transform = `translateX(${y}vw)`;
+    if (close && menuul) {
+        close.addEventListener('click', () => {
+            menuul.classList.remove("open");
+        });
     }
 
-    right.addEventListener("click", () => {
-        if (i < cards.length - 1) {
-            i++
-            y -= getStep();
-            move();
-        }
-        console.log(cards.length)
-    });
+    if (wrapper && left && right && cards.length > 0) {
+        let i = 0;
+        let y = getStep();
 
-    left.addEventListener("click", () => {
-        if (i > 0) {
-            i--
-            y += getStep();
-            move();
+        function getStep() {
+            return window.innerWidth >= 1200 ? 35 : 60;
         }
-        console.log(cards.length)
-    });
 
-    move();
-}
-)
+        function move() {
+            wrapper.style.transform = `translateX(${y}vw)`;
+        }
+
+        right.addEventListener("click", () => {
+            if (i < cards.length - 1) {
+                i++;
+                y -= getStep();
+                move();
+            }
+        });
+
+        left.addEventListener("click", () => {
+            if (i > 0) {
+                i--;
+                y += getStep();
+                move();
+            }
+        });
+
+        move();
+    }
+});
