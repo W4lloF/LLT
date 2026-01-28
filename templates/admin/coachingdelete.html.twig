@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer une demande{% endblock %}
+
+{% block body %}
+<section class="form-section">
+    <h2>Supprimer une demande</h2>
+
+    {{ form_start(form, { method: 'POST' }) }}
+
+    <div class="form-card">
+        <div class="div-form">
+            {{ form_label(form.id) }}
+            {{ form_widget(form.id) }}
+        </div>
+    </div>
+
+    <div class="submit-div">
+        <label></label>
+        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?')"
+            class="btn btn-form delete">
+            Supprimer la demande
+        </button>
+    </div>
+
+    {{ form_end(form) }}
+</section>
+{% endblock %}

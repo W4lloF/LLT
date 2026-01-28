@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes demandes de coaching{% endblock %}
+
+{% block body %}
+<section class="table-section">
+    <h2>demandes de coaching</h2>
+
+    <div class="table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Coach</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if coachings|length > 0 %}
+                {% for coaching in coachings %}
+                <tr>
+                    <td>{{ coaching.coach.pseudo }}</td>
+                    <td>{{ coaching.coachingType }}</td>
+                    <td>{{ coaching.datetime ? coaching.datetime|date('d/m/Y H:i') : '-' }}</td>
+                    <td>
+                        {% if coaching.status == 'waiting' %}
+                        <span class="status waiting">En attente</span>
+                        {% elseif coaching.status == 'accepted' %}
+                        <span class="status accepted">Acceptée</span>
+                        {% else %}
+                        {{ coaching.status }}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="4">Aucune demande effectuée.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

@@ -15,33 +15,54 @@
     </div>
 </section>
 <section class="row-section">
+    {% set hasVideos = videos is not empty %}
+
+    {% for video in videos %}
+    {% set accessible = 'ROLE_COACH' in userRoles or 'ROLE_ADMIN' in userRoles %}
+
+    {% if not accessible %}
+    {% if video.access == 'visiteurs' %}
+    {% set accessible = true %}
+    {% elseif video.access == 'connecter' and 'ROLE_JOUEUR' in userRoles %}
+    {% set accessible = true %}
+    {% elseif video.access == 'abonne' and 'ROLE_ABONNE' in userRoles %}
+    {% set accessible = true %}
+    {% endif %}
+    {% endif %}
+
     <div class="video">
-        <h3>5 tips avancés sur Jax !</h3>
-        <div class="div-iframe">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/frrmQhmwaLQ?si=DTUX60CMihDTq-j-"
-                title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+        <h3>{{ video.title }}</h3>
+        <div class="div-iframe" style="position: relative;">
+            <iframe width="560" height="315" src="{{ video.link }}" title="YouTube video player" frameborder="0"
+                allowfullscreen {% if not accessible %}style="filter: blur(8px); pointer-events: none;" {% endif %}>
+            </iframe>
+            {% if not accessible %}
+            <div class="video-overlay">
+                Cette vidéo est réservée aux
+                {% if video.access == 'connecter' %}utilisateurs connectés{% else %}abonnés{% endif %}.
+            </div>
+            {% endif %}
         </div>
     </div>
-    <div class="video">
-        <h3>5 tips avancés sur Jax !</h3>
+    {% endfor %}
+
+    {% if not hasVideos and 'ROLE_COACH' not in userRoles and 'ROLE_ADMIN' not in userRoles %}
+    <h3>Aucune vidéo disponible pour le moment.</h3>
+    {% endif %}
+
+    {% if 'ROLE_COACH' in userRoles or 'ROLE_ADMIN' in userRoles %}
+    <div class="video admin-add">
         <div class="div-iframe">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/frrmQhmwaLQ?si=DTUX60CMihDTq-j-"
-                title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            <a href="{{ path('app_videoadd') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-plus-icon lucide-plus">
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                </svg>
+            </a>
         </div>
     </div>
-    <div class="video">
-        <h3>5 tips avancés sur Jax !</h3>
-        <div class="div-iframe">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/frrmQhmwaLQ?si=DTUX60CMihDTq-j-"
-                title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
-    <div class="video">
-        <h3>5 tips avancés sur Jax !</h3>
-        <div class="div-iframe">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/frrmQhmwaLQ?si=DTUX60CMihDTq-j-"
-                title="YouTube video player" frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
+    {% endif %}
 </section>
 {% endblock %}

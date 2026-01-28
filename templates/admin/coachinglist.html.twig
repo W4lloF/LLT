@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demandes en attente{% endblock %}
+
+{% block body %}
+<section class="table-section">
+    <h2>Demandes en attente</h2>
+
+    <div class="table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Utilisateur</th>
+                    <th>Coach</th>
+                    <th>Type de coaching</th>
+                    <th>Date/Heure</th>
+                    <th>Accepter</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for coaching in coachings %}
+                <tr>
+                    <td>{{ coaching.id }}</td>
+                    <td>{{ coaching.user.username }}</td>
+                    <td>{{ coaching.coach.pseudo }}</td>
+                    <td>{{ coaching.coachingtype }}</td>
+                    <td>{{ coaching.datetime ? coaching.datetime|date('d/m/Y H:i') : '-' }}</td>
+                    <td>
+                        <a href="{{ path('app_coachingsaccept', {'id': coaching.id}) }}" class="btn btn-border">
+                            Accepter
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('app_coachingsdelete', {'id': coaching.id}) }}" class="btn"
+                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette coaching ?');">
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7">Aucune demande en attente</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

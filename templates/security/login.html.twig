@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<section class="form-section">
+    <h2>Connexion</h2>
+    {% for label, messages in app.flashes %}
+    {% for message in messages %}
+    <div class="error">{{ message }}</div>
+    {% endfor %}
+    {% endfor %}
+
+    <form id="signin-form" action="{{ path('app_login') }}" method="post">
+        <div class="form-card signin-form">
+            <div class="div-form">
+                <label for="email">Email</label>
+                <input class="input-form" id="email" name="_username" type="email" value="{{ last_username }}" required>
+            </div>
+            <div class="div-form">
+                <label for="password">Mot de passe</label>
+                <input class="input-form" id="password" name="_password" type="password" required
+                    autocomplete="current-password">
+            </div>
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <div class="submit-div">
+            <input class="btn btn-form" type="submit" value="Se connecter">
+        </div>
+    </form>
+</section>
+{% endblock %}

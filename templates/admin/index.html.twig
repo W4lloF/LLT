@@ -5,32 +5,31 @@
 {% block body %}
 <section>
     <h2>
-        Abonnement
+        Admin
     </h2>
     <div class="wrapper-div wrapper-sub">
         <div class="card card-sub">
             <div class="card-content sub-div">
                 <h2>Vidéos</h2>
-                <a class="btn btn-border" href="">Liste des vidéos</a>
-                <a class="btn btn-border" href="">Ajouter une vidéo</a>
-                <a class="btn btn-border" href="">Modifier une vidéo</a>
-                <a class="btn" href="">Supprimer une vidéo</a>
+                <a class="btn btn-border" href="{{path('app_videolist')}}">Liste des vidéos</a>
+                <a class="btn btn-border" href="{{path('app_videoadd')}}">Ajouter une vidéo</a>
+                <a href="{{ path('app_videogetid_edit') }}" class="btn btn-border">Modifier une vidéo</a>
+                <a href="{{ path('app_videogetid_delete') }}" class="btn">Supprimer une vidéo</a>
             </div>
         </div>
         <div class="card card-sub">
             <div class="card-content sub-div">
                 <h2>Utilisateurs</h2>
-                <a class="btn btn-border" href="">Liste des utilisateurs</a>
-                <a class="btn btn-border" href="">Rechercher un utilisateur</a>
-                <a class="btn btn-border" href="">Historique des paiements</a>
-                <a class="btn" href="">Supprimer une vidéo</a>
+                <a class="btn btn-border" href="{{ path('app_list') }}">Liste des utilisateurs</a>
+                <a class="btn btn-border" href="{{ path('app_search') }}">Rechercher un utilisateur</a>
+                <a class="btn" href="{{ path('app_search_delete') }}">Supprimer un utilisateur</a>
             </div>
         </div>
         <div class="card card-sub">
             <div class="card-content sub-div">
                 <h2>Demandes</h2>
-                <a class="btn btn-border" href="">Liste des demandes</a>
-                <a class="btn" href="">Supprimer une vidéo</a>
+                <a class="btn btn-border" href="{{ path('app_coachinglist') }}">Liste des demandes</a>
+                <a class="btn" href="{{ path('app_coachinggetid_delete') }}">Supprimer une demande</a>
             </div>
         </div>
     </div>

@@ -1,0 +1,34 @@
+<section class="form-section">
+    <h2>Ajouter une vidéo</h2>
+
+    {{ form_start(form, { method: 'POST', attr: { id: 'edit-form', class: '' } }) }}
+
+    <div class="form-card">
+        <div class="div-form">
+            {{ form_label(form.title) }}
+            {{ form_widget(form.title) }}
+        </div>
+
+        <div class="div-form">
+            {{ form_label(form.link) }}
+            {{ form_widget(form.link) }}
+        </div>
+
+        <div class="div-form">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+        </div>
+
+        <div class="div-form">
+            {{ form_label(form.access) }}
+            {{ form_widget(form.access) }}
+        </div>
+    </div>
+
+    <div class="submit-div">
+        <label></label>
+        <button class="btn btn-form delete">Ajouter la vidéo</button>
+    </div>
+
+    {{ form_end(form) }}
+</section>

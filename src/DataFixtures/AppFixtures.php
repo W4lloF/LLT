@@ -17,8 +17,12 @@ class AppFixtures extends Fixture
     {
         $firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Emma'];
         $lastNames = ['Dupont', 'Martin', 'Durand', 'Leroy', 'Moreau'];
-        $roles = ['SUBBED', 'JOUEURS', 'SUBBED', 'JOUEURS', 'ROLES_ADMIN'];
-
+        $roles = [  // par défaut visiteur
+        User::ROLE_JOUEUR,    // joueur
+        User::ROLE_ABONNE,    // abonné
+        User::ROLE_COACH,     // coach
+        User::ROLE_ADMIN      // admin
+        ];
         $subscriptionStatuses = ['1 month', '6 month', '12 month'];
         $coachingStatuses = ['asked', 'confirmed', 'done'];
 
@@ -26,42 +30,27 @@ class AppFixtures extends Fixture
         $coaches = [];
         $videos = [];
 
-        // --- Création des utilisateurs ---
         for ($i = 0; $i < 5; $i++) {
             $user = new User();
             $username = strtolower($firstNames[$i] . '.' . $lastNames[$i]);
             $user->setUsername($username);
             $user->setEmail($username . '@example.com');
             $user->setPassword(password_hash('Password123', PASSWORD_BCRYPT));
-            $user->setRole($roles[$i]);
+            $user->setRoles([$roles[$i]]);
             $user->setRegistrationDate((new \DateTime())->modify('-' . rand(0, 365) . ' days'));
 
-            // Coins cohérents selon le rôle
-            $user->setCoin(0); // valeur par défaut
-
-            switch ($roles[$i]) {
-                case 'ROLES_ADMIN':
-                    $user->setCoin(rand(100, 500));
-                    break;
-                case 'JOUEURS':
-                    $user->setCoin(rand(50, 200));
-                    break;
-                case 'SUBBED':
-                    $user->setCoin(rand(20, 100));
-                    break;
-            }
+            $user->setCoin(0);
 
             $manager->persist($user);
             $users[] = $user;
         }
 
-        // --- Création des coaches ---
         for ($i = 0; $i < 5; $i++) {
             $coach = new Coach();
             $coach->setPseudo('Coach_' . $i);
             $coach->setEmail('coach' . $i . '@example.com');
-            $coach->setType($i % 2 === 0 ? 'Fitness' : 'Yoga');
-            $coach->setBio('Bio du coach ' . $i);
+            $coach->setType($i % 2 === 0 ? 'Pro' : 'Bénévole');
+            $coach->setBio('lores ' . $i);
             $coach->setExperiences(($i + 1) . ' ans d’expérience');
             $coach->setNationality(['FR', 'US', 'ES', 'IT', 'DE'][$i]);
             $coach->setLanguages(['FR', 'EN', 'ES', 'IT', 'DE'][$i]);
@@ -72,7 +61,6 @@ class AppFixtures extends Fixture
             $coaches[] = $coach;
         }
 
-        // --- Création des subscriptions ---
         foreach ($users as $i => $user) {
             $subscription = new Subscription();
             $subscription->setUser($user);
@@ -84,26 +72,17 @@ class AppFixtures extends Fixture
             $manager->persist($subscription);
         }
 
-        // --- Création des vidéos ---
         for ($i = 0; $i < 5; $i++) {
             $video = new Videos();
             $video->setTitle('Vidéo ' . ($i + 1));
             $video->setLink('https://example.com/video' . ($i + 1));
             $video->setDescription('Description de la vidéo ' . ($i + 1));
-            $video->setAccess($roles[$i]); // accès selon le rôle
-
-            // Lier aléatoirement aux utilisateurs
-            $randUsers = (array)array_rand($users, rand(1, 3));
-            foreach ($randUsers as $uKey) {
-                $video->addUser($users[$uKey]);
-                $users[$uKey]->addVideo($video);
-            }
+            $video->setAccess($roles[$i]);
 
             $manager->persist($video);
             $videos[] = $video;
         }
 
-        // --- Création des coachings ---
         for ($i = 0; $i < 5; $i++) {
             $coaching = new Coaching();
             $coaching->setUser($users[$i]);
@@ -115,7 +94,6 @@ class AppFixtures extends Fixture
             $manager->persist($coaching);
         }
 
-        // --- Création des feedbacks ---
         for ($i = 0; $i < 5; $i++) {
             $feedback = new Feedback();
             $feedback->setUser($users[$i]);

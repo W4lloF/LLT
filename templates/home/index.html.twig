@@ -16,124 +16,69 @@
     <nav>
         <ul class="coach-ul">
             <li>
-                <a href="#">
-                    <svg class="svg96" xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewbox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-chevron-left-icon lucide-chevron-left">
+                <button class="leftarrow">
+                    <svg class="svg96" xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewbox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left">
                         <path d="m15 18-6-6 6-6" />
                     </svg>
-                </a>
+                </button>
             </li>
             <li class="all-coach">
                 <div class="wrapper-div">
+                    {% if coachs %}
+                    {% for coach in coachs %}
+                    {% set image = coach.photo ? 'img/' ~ coach.photo : 'img/placeholder.png' %}
                     <div class="card">
                         <div class="img-coach">
-                            <div class="img-background"></div>
+                            <div class="img-background" style="background-image: url('{{ asset(image) }}')" ;>
+                            </div>
                         </div>
                         <div class="card-content">
-                            <h3>Kkoma</h3>
-                            <svg class="fr-flag" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 3 2">
-                                <rect fill="#CE1126" width="3" height="2" />
-                                <rect fill="#fff" width="2" height="2" />
-                                <rect fill="#002654" width="1" height="2" />
-                            </svg>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eos veniam laboriosam
-                                nihil soluta eligendi esse itaque corporis, hic vero eaque nemo temporibus saepe
-                                consequuntur dolores commodi perspiciatis quas voluptatum!</p>
+                            <h3>{{ coach.pseudo }}</h3>
+                            {% include 'home/_flag.html.twig' with { country: coach.nationality } %}
+                            <p>{{ coach.bio|length > 100 ? coach.bio|slice(0, 100) ~ '...' : coach.bio }}</p>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="img-coach">
-                            <div class="img-background"></div>
-                        </div>
-                        <div class="card-content">
-                            <h3>Kkoma</h3>
-                            <svg class="fr-flag" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 3 2">
-                                <rect fill="#CE1126" width="3" height="2" />
-                                <rect fill="#fff" width="2" height="2" />
-                                <rect fill="#002654" width="1" height="2" />
-                            </svg>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eos veniam laboriosam
-                                nihil soluta eligendi esse itaque corporis, hic vero eaque nemo temporibus saepe
-                                consequuntur dolores commodi perspiciatis quas voluptatum!</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="img-coach">
-                            <div class="img-background"></div>
-                        </div>
-                        <div class="card-content">
-                            <h3>Kkoma</h3>
-                            <svg class="fr-flag" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 3 2">
-                                <rect fill="#CE1126" width="3" height="2" />
-                                <rect fill="#fff" width="2" height="2" />
-                                <rect fill="#002654" width="1" height="2" />
-                            </svg>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eos veniam laboriosam
-                                nihil soluta eligendi esse itaque corporis, hic vero eaque nemo temporibus saepe
-                                consequuntur dolores commodi perspiciatis quas voluptatum!</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="img-coach">
-                            <div class="img-background"></div>
-                        </div>
-                        <div class="card-content">
-                            <h3>Kkoma</h3>
-                            <svg class="fr-flag" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 3 2">
-                                <rect fill="#CE1126" width="3" height="2" />
-                                <rect fill="#fff" width="2" height="2" />
-                                <rect fill="#002654" width="1" height="2" />
-                            </svg>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eos veniam laboriosam
-                                nihil soluta eligendi esse itaque corporis, hic vero eaque nemo temporibus saepe
-                                consequuntur dolores commodi perspiciatis quas voluptatum!</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="img-coach">
-                            <div class="img-background"></div>
-                        </div>
-                        <div class="card-content">
-                            <h3>Kkoma</h3>
-                            <svg class="fr-flag" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 3 2">
-                                <rect fill="#CE1126" width="3" height="2" />
-                                <rect fill="#fff" width="2" height="2" />
-                                <rect fill="#002654" width="1" height="2" />
-                            </svg>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eos veniam laboriosam
-                                nihil soluta eligendi esse itaque corporis, hic vero eaque nemo temporibus saepe
-                                consequuntur dolores commodi perspiciatis quas voluptatum!</p>
-                        </div>
-                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <h3>Aucune coach accessible pour le moment.</h3>
+                    {% endif %}
                 </div>
             </li>
             <li>
-                <a href="#">
-                    <svg class="svg96" xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewbox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                <button class="rightarrow">
+                    <svg class="svg96" xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewbox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                        stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
                         <path d="m9 18 6-6-6-6" />
                     </svg>
-                </a>
+                </button>
             </li>
         </ul>
     </nav>
 </section>
-<section>
+
+<section class="video-section">
     <h2>Vidéos</h2>
+    {% if video %}
     <div class="video">
-        <h3>5 tips avancés sur Jax !</h3>
+        <h3>{{ video.title }}</h3>
         <div class="div-iframe">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/frrmQhmwaLQ?si=DTUX60CMihDTq-j-"
-                title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="{{ video.link }}" title="YouTube video player" frameborder="0"
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
+    {% else %}
+    <h3>Aucune vidéo accessible pour le moment.</h3>
+    {% endif %}
 </section>
+
 <section>
     <p class="subscription-text">Lorem ipsum dolor sit amet consectetur</p>
     <div>
-        <a class="btn btn-global" href="">Rejoins Nous</a>
+        <a class="btn btn-global" href="{{ path('app_signup') }}">Rejoins Nous</a>
     </div>
 </section>
 {% endblock %}

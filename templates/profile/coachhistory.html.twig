@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+<section class="table-section">
+    <h2>Historique coaching effectuer</h2>
+
+    <div class="table-card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Type</th>
+                    <th>Jours</th>
+                    <th>Mois</th>
+                    <th>Année</th>
+                    <th>Heure</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if coachings|length > 0 %}
+                {% for coaching in coachings %}
+                <tr>
+                    <td>{{ coaching.user.username }}</td>
+                    <td>{{ coaching.coachingType }}</td>
+                    <td>{{ coaching.datetime|date('d') }}</td>
+                    <td>{{ coaching.datetime|date('F') }}</td>
+                    <td>{{ coaching.datetime|date('Y') }}</td>
+                    <td>{{ coaching.datetime|date('H:i') }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="6">Aucun coaching terminé pour le moment.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

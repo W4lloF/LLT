@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un feedback pour {{ user.username }}{% endblock %}
+
+{% block body %}
+<section class="form-section">
+    <h2>Créer un feedback pour {{ user.username }}</h2>
+
+    {{ form_start(form, { method: 'POST' }) }}
+
+    <div class="form-card">
+        <div class="div-form">
+            {{ form_label(form.text) }}
+            {{ form_widget(form.text) }}
+        </div>
+    </div>
+
+    <div class="submit-div">
+        <label></label>
+        <button class="btn btn-form">Envoyer le feedback</button>
+    </div>
+
+    {{ form_end(form) }}
+</section>
+{% endblock %}

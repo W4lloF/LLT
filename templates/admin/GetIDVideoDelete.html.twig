@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer une vidéo{% endblock %}
+
+{% block body %}
+<section class="form-section">
+    <h2>Supprimer une vidéo</h2>
+
+    {{ form_start(form, { method: 'POST' }) }}
+    <div class="form-card">
+        <div class="div-form">
+            {{ form_label(form.id) }}
+            {{ form_widget(form.id) }}
+        </div>
+    </div>
+    <div class="submit-div">
+        <label></label>
+        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vidéo ?')" class="btn btn-form delete">Supprimer la vidéo</button>
+    </div>
+    {{ form_end(form) }}
+</section>
+{% endblock %}

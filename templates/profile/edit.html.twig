@@ -1,31 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Modifier profil{% endblock %}
 
 {% block body %}
 <section class="form-section">
     <h2>Modifier</h2>
-    <form id="edit-form" action="{{ path('app_edit') }}" method="post">
-        <div class="form-card">
-            <div class="div-form">
-                <label for="pseudo">Pseudo</label>
-                <input class="input-form" id="pseudo" name="pseudo" type="text" required>
-            </div>
-            <div class="div-form">
-                <label for="email">Email</label>
-                <input class="input-form" id="email" name="email" type="email" required>
 
-            </div>
-            <div class="div-form">
-                <label for="password">Mot de passe</label>
-                <input class="input-form" id="password" name="password" type="password" required
-                    autocomplete="current-password">
-            </div>
+    {{ form_start(form, {
+        attr: {
+            id: 'edit-form',
+            class: ''
+        }
+    }) }}
+
+    <div class="form-card">
+        <div class="div-form">
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
         </div>
-        <div class="submit-div">
-            <label></label>
-            <input class="btn btn-form" id="edit" name="edit" type="submit" value="Modifier profil">
+
+        <div class="div-form">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
         </div>
-    </form>
+
+        <div class="div-form">
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password) }}
+        </div>
+    </div>
+
+    <div class="submit-div">
+        <label></label>
+        <button class="btn btn-form">Modifier profil</button>
+    </div>
+
+    {{ form_end(form) }}
 </section>
 {% endblock %}
+

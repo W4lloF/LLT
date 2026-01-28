@@ -4,6 +4,25 @@
 
 {% block body %}
 <section>
+    {% if subscription %}
+    <h2>
+        Mon Abonnement
+    </h2>
+    <div class="card card-sub">
+        <div class="card-content sub-div">
+            <h2>Vous êtes abonné !</h2>
+            <ul>
+                <li>Début : {{ subscription.startDate|date('d/m/Y') }}</li>
+                <li>Fin : {{ subscription.endDate|date('d/m/Y') }}</li>
+                <li>Durée : {{ subscription.status|replace({'_months':''}) }} mois</li>
+            </ul>
+            <a class="btn btn-sub" href="{{ path('app_unsubscribe')}}"
+                onclick="return confirm('Êtes-vous sûr de vouloir vous désabonnez ?')">
+                Se désabonner
+            </a>
+        </div>
+    </div>
+    {% else %}
     <h2>
         Abonnement
     </h2>
@@ -12,107 +31,111 @@
             <div class="card-content sub-div">
                 <p class="p-sub time">1 mois</p>
                 <ul class="ul-content">
-                    <li class="li-sub">avantage 1 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                    <li class="li-sub">Vidéos prémium<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
                             <path d="M20 6 9 17l-5-5" />
                         </svg></li>
-                    <li class="li-sub">avantage 2 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                    <li class="li-sub">Review en groupe avec un coach<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
                             <path d="M20 6 9 17l-5-5" />
                         </svg></li>
-                    <li class="li-sub">avantage 3 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
-                            <path d="M20 6 9 17l-5-5" />
-                        </svg></li>
-                    <li class="li-sub">avantage 4 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
+                    <li class="li-sub">1 scrim en équipe par mois<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
                             <path d="M18 6 6 18" />
                             <path d="m6 6 12 12" />
                         </svg></li>
-                    <li class="li-sub">avantage 5 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
+                    <li class="li-sub">Tournoi avec un coach<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
                             <path d="M18 6 6 18" />
                             <path d="m6 6 12 12" />
                         </svg></li>
                 </ul>
                 <p class="p-sub">4,99€ / mois</p>
-                <a class="btn btn-sub" href="">S'abonner</a>
+                <a class="btn btn-sub" href="{{ path('app_subscribe', {duration: 1}) }}"
+                    onclick="return confirm('Êtes-vous sûr de vouloir payer 4,99€ pour 1 mois ?')">
+                    S'abonner
+                </a>
             </div>
         </div>
         <div class="card card-sub">
             <div class="card-content sub-div">
                 <p class="p-sub time">6 mois</p>
                 <ul class="ul-content">
-                    <li class="li-sub">avantage 1 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                    <li class="li-sub">Vidéos prémium<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
                             <path d="M20 6 9 17l-5-5" />
                         </svg></li>
-                    <li class="li-sub">avantage 2 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                    <li class="li-sub">Review en groupe avec un coach<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
                             <path d="M20 6 9 17l-5-5" />
                         </svg></li>
-                    <li class="li-sub">avantage 3 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                    <li class="li-sub">1 scrim en équipe par mois<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
                             <path d="M20 6 9 17l-5-5" />
                         </svg></li>
-                    <li class="li-sub">avantage 4 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
-                            <path d="M20 6 9 17l-5-5" />
-                        </svg></li>
-                    <li class="li-sub">avantage 5 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
+                    <li class="li-sub">Tournoi avec un coach<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
                             <path d="M18 6 6 18" />
                             <path d="m6 6 12 12" />
                         </svg></li>
                 </ul>
                 <p class="p-sub">23,99€</p>
-                <a class="btn btn-sub" href="">S'abonner</a>
+                <a class="btn btn-sub" href="{{ path('app_subscribe', {duration: 6}) }}"
+                    onclick="return confirm('Êtes-vous sûr de vouloir payer 23,99€ pour 6 mois ?')">
+                    S'abonner
+                </a>
             </div>
         </div>
         <div class="card card-sub">
             <div class="card-content sub-div">
                 <p class="p-sub time">12 mois</p>
                 <ul class="ul-content">
-                    <li class="li-sub">avantage 1 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                    <li class="li-sub">Vidéos prémium<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
                             <path d="M20 6 9 17l-5-5" />
                         </svg></li>
-                    <li class="li-sub">avantage 2 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                    <li class="li-sub">Review en groupe avec un coach<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
                             <path d="M20 6 9 17l-5-5" />
                         </svg></li>
-                    <li class="li-sub">avantage 3 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                    <li class="li-sub">1 scrim en équipe par mois<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
                             <path d="M20 6 9 17l-5-5" />
                         </svg></li>
-                    <li class="li-sub">avantage 4 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
-                            <path d="M20 6 9 17l-5-5" />
-                        </svg></li>
-                    <li class="li-sub">avantage 5 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="lucide lucide-check-icon lucide-check">
+                    <li class="li-sub">Tournoi avec un coach<svg xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
                             <path d="M20 6 9 17l-5-5" />
                         </svg></li>
                 </ul>
                 <p class="p-sub">49,99€</p>
-                <a class="btn btn-sub" href="">S'abonner</a>
+                <a class="btn btn-sub" href="{{ path('app_subscribe', {duration: 12}) }}"
+                    onclick="return confirm('Êtes-vous sûr de vouloir payer 49,99€ pour 12 mois ?')">
+                    S'abonner
+                </a>
             </div>
         </div>
     </div>
+    {% endif %}
 </section>
 {% endblock %}

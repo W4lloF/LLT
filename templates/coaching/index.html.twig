@@ -21,85 +21,30 @@
             title="YouTube video player" frameborder="0" allowfullscreen></iframe>
     </div>
     <div>
-        <a class="btn book-now" href="">Réserve maintenant !</a>
+        <a class="btn book-now" href="{{path('app_booking')}}">Réserve maintenant !</a>
     </div>
 </section>
 <section class="row-section">
-    <div class="card coach-page">
+    {% if coachs %}
+    {% for coach in coachs %}
+    {% set image = coach.photo ? 'img/' ~ coach.photo : 'img/placeholder.png' %}
+    <div class="card">
         <div class="img-coach img-coaching">
-            <div class="img-background"></div>
+            <div class="img-background" style="background-image: url('{{ asset(image) }}')" ;>
+            </div>
         </div>
         <div class="card-content info-coaching">
-            <h3>Kkoma</h3>
-            <p>Type de coach : Pro</p>
-            <p>Experiences : Lorem ipsum</p>
-            <p>Langues : Français, English</p>
-            <svg class="fr-flag" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 3 2">
-                <rect fill="#CE1126" width="3" height="2" />
-                <rect fill="#fff" width="2" height="2" />
-                <rect fill="#002654" width="1" height="2" />
-            </svg>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eos veniam laboriosam nihil soluta
-                eligendi esse itaque corporis, hic vero eaque nemo temporibus saepe consequuntur dolores commodi
-                perspiciatis quas voluptatum!</p>
+            <h3>{{ coach.pseudo }}</h3>
+            <p>Type de coach : {{coach.type}} </p>
+            <p>Experiences : {{coach.experiences}}</p>
+            <p>Langues : {{coach.languages}}</p>
+            {% include 'home/_flag.html.twig' with { country: coach.nationality } %}
+            <p>{{ coach.bio }}</p>
         </div>
     </div>
-    <div class="card coach-page">
-        <div class="img-coach img-coaching">
-            <div class="img-background"></div>
-        </div>
-        <div class="card-content info-coaching">
-            <h3>Kkoma</h3>
-            <p>Type de coach : Pro</p>
-            <p>Experiences : Lorem ipsum</p>
-            <p>Langues : Français, English</p>
-            <svg class="fr-flag" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 3 2">
-                <rect fill="#CE1126" width="3" height="2" />
-                <rect fill="#fff" width="2" height="2" />
-                <rect fill="#002654" width="1" height="2" />
-            </svg>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eos veniam laboriosam nihil soluta
-                eligendi esse itaque corporis, hic vero eaque nemo temporibus saepe consequuntur dolores commodi
-                perspiciatis quas voluptatum!</p>
-        </div>
-    </div>
-    <div class="card coach-page">
-        <div class="img-coach img-coaching">
-            <div class="img-background"></div>
-        </div>
-        <div class="card-content info-coaching">
-            <h3>Kkoma</h3>
-            <p>Type de coach : Pro</p>
-            <p>Experiences : Lorem ipsum</p>
-            <p>Langues : Français, English</p>
-            <svg class="fr-flag" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 3 2">
-                <rect fill="#CE1126" width="3" height="2" />
-                <rect fill="#fff" width="2" height="2" />
-                <rect fill="#002654" width="1" height="2" />
-            </svg>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eos veniam laboriosam nihil soluta
-                eligendi esse itaque corporis, hic vero eaque nemo temporibus saepe consequuntur dolores commodi
-                perspiciatis quas voluptatum!</p>
-        </div>
-    </div>
-    <div class="card coach-page">
-        <div class="img-coach img-coaching">
-            <div class="img-background"></div>
-        </div>
-        <div class="card-content info-coaching">
-            <h3>Kkoma</h3>
-            <p>Type de coach : Pro</p>
-            <p>Experiences : Lorem ipsum</p>
-            <p>Langues : Français, English</p>
-            <svg class="fr-flag" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 3 2">
-                <rect fill="#CE1126" width="3" height="2" />
-                <rect fill="#fff" width="2" height="2" />
-                <rect fill="#002654" width="1" height="2" />
-            </svg>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus eos veniam laboriosam nihil soluta
-                eligendi esse itaque corporis, hic vero eaque nemo temporibus saepe consequuntur dolores commodi
-                perspiciatis quas voluptatum!</p>
-        </div>
-    </div>
+    {% endfor %}
+    {% else %}
+    <h3>Aucune coach accessible pour le moment.</h3>
+    {% endif %}
 </section>
 {% endblock %}

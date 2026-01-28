@@ -1,21 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Supprimer un utilisateur{% endblock %}
 
 {% block body %}
 <section class="form-section">
-    <h2>Supprimer</h2>
-    <form id="signin-form" action="" method="post">
-        <div class="form-card signin-form">
-            <div class="div-form">
-                <label for="email">Email</label>
-                <input class="input-form" id="email" name="email" type="email" required>
-            </div>
+    <h2>Supprimer un utilisateur</h2>
+
+    {{ form_start(form, { method: 'POST' }) }}
+
+    <div class="form-card">
+        <div class="div-form">
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
         </div>
-        <div class="submit-div">
-            <label></label>
-            <input class="btn btn-form" id="signin" name="signin" type="submit" value="Rechercher">
-        </div>
-    </form>
+    </div>
+
+    <div class="submit-div">
+        <label></label>
+        <button onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')" class="btn btn-form delete">
+            Supprimer l’utilisateur
+        </button>
+    </div>
+
+    {{ form_end(form) }}
 </section>
 {% endblock %}

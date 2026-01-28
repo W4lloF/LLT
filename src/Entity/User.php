@@ -7,10 +7,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
+#[UniqueEntity(fields: ['email'], message: 'Cet email est déjà utilisé.')]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
+    public const ROLE_JOUEUR   = 'ROLE_JOUEUR';
+    public const ROLE_ABONNE   = 'ROLE_ABONNE';
+    public const ROLE_COACH    = 'ROLE_COACH';
+    public const ROLE_ADMIN    = 'ROLE_ADMIN';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -19,31 +29,22 @@ class User
     #[ORM\Column(length: 50)]
     private ?string $username = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $role = null;
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $registration_date = null;
 
-    #[ORM\Column]
-    private ?int $coin = null;
-
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Coach $coach = null;
 
-    /**
-     * @var Collection<int, Videos>
-     */
-    #[ORM\ManyToMany(targetEntity: Videos::class, mappedBy: 'user')]
-    private Collection $videos;
-
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist'])]
     private ?Subscription $subscription = null;
 
     /**
@@ -60,7 +61,6 @@ class User
 
     public function __construct()
     {
-        $this->videos = new ArrayCollection();
         $this->coachings = new ArrayCollection();
         $this->feedback = new ArrayCollection();
     }
@@ -106,15 +106,20 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
+    public function getRoles(): array
     {
-        return $this->role;
+        $roles = $this->roles;
+
+        if (empty($roles)) {
+            $roles[] = self::ROLE_JOUEUR;
+        }
+
+        return array_unique($roles);
     }
 
-    public function setRole(string $role): static
+    public function setRoles(array $roles): static
     {
-        $this->role = $role;
-
+        $this->roles = $roles;
         return $this;
     }
 
@@ -126,18 +131,6 @@ class User
     public function setRegistrationDate(\DateTime $registration_date): static
     {
         $this->registration_date = $registration_date;
-
-        return $this;
-    }
-
-    public function getCoin(): ?int
-    {
-        return $this->coin;
-    }
-
-    public function setCoin(int $coin): static
-    {
-        $this->coin = $coin;
 
         return $this;
     }
@@ -155,33 +148,6 @@ class User
         }
 
         $this->coach = $coach;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Videos>
-     */
-    public function getVideos(): Collection
-    {
-        return $this->videos;
-    }
-
-    public function addVideo(Videos $video): static
-    {
-        if (!$this->videos->contains($video)) {
-            $this->videos->add($video);
-            $video->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVideo(Videos $video): static
-    {
-        if ($this->videos->removeElement($video)) {
-            $video->removeUser($this);
-        }
 
         return $this;
     }
@@ -261,5 +227,12 @@ class User
         }
 
         return $this;
+    }
+
+    public function eraseCredentials(): void {}
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }

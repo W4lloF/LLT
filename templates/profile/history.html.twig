@@ -16,22 +16,30 @@
                     <th>Mois</th>
                     <th>Année</th>
                     <th>Heure</th>
-                    <th>Feedback</th>
                 </tr>
             </thead>
 
             <tbody>
+                {% for coaching in coachings %}
+                {% if coaching.status == 'done' %}
                 <tr>
-                    <td>Kkoma</td>
-                    <td>Gratuit</td>
-                    <td>25</td>
-                    <td>Janvier</td>
-                    <td>2026</td>
-                    <td>13h00</td>
-                    <td>
-                        <a href="#" class="btn btn-border">Voir</a>
-                    </td>
+                    <td>{{ coaching.coach.user.username }}</td>
+                    <td>{{ coaching.coachingType }}</td>
+                    <td>{{ coaching.datetime|date('d') }}</td>
+                    <td>{{ coaching.datetime|date('F') }}</td>
+                    <td>{{ coaching.datetime|date('Y') }}</td>
+                    <td>{{ coaching.datetime|date('H:i') }}</td>
                 </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7">Aucun coaching terminé pour le moment.</td>
+                </tr>
+                {% endif %}
+                {% else %}
+                <tr>
+                    <td colspan="7">Aucun coaching terminé pour le moment.</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

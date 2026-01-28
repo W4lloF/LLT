@@ -26,7 +26,7 @@ class Subscription
     #[ORM\JoinColumn(nullable: false)]
     private ?string $status = null;
 
-    #[ORM\OneToOne(inversedBy: 'subscription', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'subscription', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 

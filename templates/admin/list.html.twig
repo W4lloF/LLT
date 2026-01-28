@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}{{ title|default('Liste des utilisateurs') }}{% endblock %}
 
 {% block body %}
 <section class="table-section">
@@ -11,33 +11,34 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nom</th>
-                    <th>Statut</th>
-                    <th>Action</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Date d'inscription</th>
+                    <th>Supprimer</th>
                 </tr>
             </thead>
 
             <tbody>
+                {% for user in users %}
                 <tr>
-                    <td>1</td>
-                    <td>Exemple 1</td>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles|join(', ') }}</td>
+                    <td>{{ user.registrationDate ? user.registrationDate|date('d/m/Y H:i') : '-' }}</td>
                     <td>
-                        <a href="#" class="btn btn-border">Voir</a>
-                    </td>
-                    <td>
-                        <a href="#" class="btn">Supprimer</a>
+                        <a href="{{ path('app_userdelete', {'username': user.username}) }}" class="btn"
+                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                            Supprimer
+                        </a>
                     </td>
                 </tr>
+                {% else %}
                 <tr>
-                    <td>2</td>
-                    <td>Exemple 2</td>
-                    <td>
-                        <a href="#" class="btn btn-border">Voir</a>
-                    </td>
-                    <td>
-                        <a href="#" class="btn">Supprimer</a>
-                    </td>
+                    <td colspan="6">Aucun utilisateur trouvé.</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

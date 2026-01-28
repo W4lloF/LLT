@@ -1,0 +1,15 @@
+{% if country == 'FR' %}
+<img src="{{ asset('img/flags/fr.svg') }}" class="flag">
+
+{% elseif country == 'ES' %}
+<img src="{{ asset('img/flags/es.svg') }}" class="flag">
+
+{% elseif country == 'IT' %}
+<img src="{{ asset('img/flags/it.svg') }}" class="flag">
+
+{% elseif country == 'US' %}
+<img src="{{ asset('img/flags/us.svg') }}" class="flag">
+
+{% elseif country == 'DE' %}
+<img src="{{ asset('img/flags/de.svg') }}" class="flag">
+{% endif %}

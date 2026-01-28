@@ -7,7 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+#[UniqueEntity(fields: ['email'], message: 'Cet email est déjà utilisé.')]
 #[ORM\Entity(repositoryClass: CoachRepository::class)]
 class Coach
 {
@@ -19,7 +21,7 @@ class Coach
     #[ORM\Column(length: 50)]
     private ?string $pseudo = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 20)]
@@ -31,7 +33,7 @@ class Coach
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $experiences = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 2, nullable: true)]
     private ?string $nationality = null;
 
     #[ORM\Column(length: 100, nullable: true)]
@@ -52,6 +54,9 @@ class Coach
      */
     #[ORM\OneToMany(targetEntity: Coaching::class, mappedBy: 'coach', orphanRemoval: true)]
     private Collection $coachings;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photo = null;
 
     public function __construct()
     {
@@ -216,6 +221,18 @@ class Coach
                 $coaching->setCoach(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): static
+    {
+        $this->photo = $photo;
 
         return $this;
     }

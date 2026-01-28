@@ -9,16 +9,40 @@
     </h2>
     <div class="wrapper-div">
         <div class="card profile-div">
-                <ul class="ul-content ul-profile">
-                    <li>Pseudo : Lorem</li>
-                    <li>Email : 123@gmail.com</li>
-                    <li>Abonné : Non</li>
-                    <li>Date de création : 25 décembre 2003</li>
-                    <li>Jeton : 0</li>
-                    <li><a class="btn profile-btn" href="">Historique coaching</a></li>
-                    <li><a class="btn profile-btn" href="">Modifier profil</a></li>
-                    <li><a class="btn delete" href="">Supprimer profil</a></li>
-                </ul>
+            <ul class="ul-content ul-profile">
+                <li>Pseudo : {{ app.user.username }}</li>
+                <li>Email : {{ app.user.email }}</li>
+
+                <li>
+                    Abonné :
+                    {% if app.user.subscription %}
+                    Oui
+                    {% else %}
+                    Non
+                    {% endif %}
+                </li>
+
+                <li>
+                    Date de création :
+                    {{ app.user.registrationDate|date('d/m/Y') }}
+                </li>
+                {% if 'ROLE_COACH' in app.user.roles %}
+                <li>Coach</li>
+                <li><a class="btn btn-border" href="{{path('app_listcoach')}}">Liste Utilisateurs</a></li>
+                <li><a class="btn profile-btn" href="{{path('app_coachfeedbacks')}}">Liste des Feedback</a></li>
+                <li><a class="btn profile-btn" href="{{path('app_coachcoachings')}}">Liste des demandes</a></li>
+                <li><a class="btn profile-btn" href="{{path('app_coachhistory')}}">Historique coaching</a></li>
+                {% else %}
+                <li><a class="btn profile-btn" href="{{path('app_coachings')}}">Liste des demandes</a></li>
+                <li><a class="btn profile-btn" href="{{path('app_history')}}">Historique coaching</a></li>
+                {% endif %}
+                <li><a class="btn profile-btn" href="{{path('app_edit')}}">Modifier profil</a></li>
+                <li><a class="btn delete" href="{{path('app_delete')}}"
+                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre profil ?')">
+                        Supprimer profil
+                    </a></li>
+
+            </ul>
         </div>
 </section>
 {% endblock %}

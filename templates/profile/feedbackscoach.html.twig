@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Feedback{% endblock %}
+
+{% block body %}
+    <h2>Feedback</h2>
+    <section class="row-section">
+        {% if feedbacks|length > 0 %}
+            {% for feedback in feedbacks %}
+                <div class="card">
+                    <ul class="ul-content ul-profile">
+                        <li>Utilisateur : {{ feedback.user.username }}</li>
+                        <li>Date : {{ feedback.creationDate ? feedback.creationDate|date('d/F/Y H:i') : '-' }}</li>
+                        <li class="text-feedback">Feedback : {{ feedback.text }}</li>
+                    </ul>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun feedback disponible.</p>
+        {% endif %}
+    </section>
+{% endblock %}
