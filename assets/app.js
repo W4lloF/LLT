@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (wrapper && left && right && cards.length > 0) {
         let i = 0;
-        let y = getStep();
+        let y = 0;
 
         function getStep() {
             return window.innerWidth >= 1200 ? 35 : 60;

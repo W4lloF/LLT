@@ -15,7 +15,7 @@ final class HomeController extends AbstractController
     {
         $coachs = $coachRepository->findAll();
 
-        $videoId = 6;
+        $videoId = 1;
         $video = $videosRepository->find($videoId);
 
         return $this->render('home/index.html.twig', [

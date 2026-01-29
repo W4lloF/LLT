@@ -243,7 +243,7 @@ final class AdminController extends AbstractController
         return $this->redirectToRoute('app_coachingslist');
     }
 
-    #[Route('/admin/coachings/delete/choose', name: 'app_gecoachingtid_delete')]
+    #[Route('/admin/coachings/delete/choose', name: 'app_getcoachingid_delete')]
     public function GetIDCoachingDelete(Request $request): Response
     {
         $form = $this->createForm(\App\Form\GetCoachingIDType::class);

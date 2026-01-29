@@ -25,10 +25,10 @@
                 </button>
             </li>
             <li class="all-coach">
-                <div class="wrapper-div">
+                <div class="wrapper-div carrousel-div">
                     {% if coachs %}
                     {% for coach in coachs %}
-                    {% set image = coach.photo ? 'img/' ~ coach.photo : 'img/placeholder.png' %}
+                    {% set image = coach.photo ? 'img/coachs/' ~ coach.photo : 'img/coachs/placeholder.png' %}
                     <div class="card">
                         <div class="img-coach">
                             <div class="img-background" style="background-image: url('{{ asset(image) }}')" ;>

@@ -119,8 +119,14 @@ final class ProfileController extends AbstractController
     #[Route('/profile/feedback', name: 'app_feedback')]
     public function feedback(): Response
     {
+
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $feedbacks = $user->getFeedback();
+
         return $this->render('profile/feedback.html.twig', [
-            'controller_name' => 'ProfileController',
+            'feedbacks' => $feedbacks,
         ]);
     }
 

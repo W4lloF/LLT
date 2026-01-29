@@ -27,13 +27,13 @@
 <section class="row-section">
     {% if coachs %}
     {% for coach in coachs %}
-    {% set image = coach.photo ? 'img/' ~ coach.photo : 'img/placeholder.png' %}
+    {% set image = coach.photo ? 'img/coachs/' ~ coach.photo : 'img/coachs/placeholder.png' %}
     <div class="card">
         <div class="img-coach img-coaching">
-            <div class="img-background" style="background-image: url('{{ asset(image) }}')" ;>
+            <div class="img-background img-background-coaching" style="background-image: url('{{ asset(image) }}')" ;>
             </div>
         </div>
-        <div class="card-content info-coaching">
+        <div class="card-content">
             <h3>{{ coach.pseudo }}</h3>
             <p>Type de coach : {{coach.type}} </p>
             <p>Experiences : {{coach.experiences}}</p>
