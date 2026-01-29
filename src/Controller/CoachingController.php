@@ -28,6 +28,13 @@ final class CoachingController extends AbstractController
     #[Route('/coaching/planning', name: 'app_planning')]
     public function planning(): Response
     {
+        /** @var \App\Entity\User|null $user */
+        $user = $this->getUser();
+
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
         return $this->render('coaching/planning.html.twig', [
             'controller_name' => 'CoachingController',
         ]);

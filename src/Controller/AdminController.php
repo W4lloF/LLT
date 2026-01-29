@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\VideoType;
+use App\Form\EditVideoType;
 use App\Repository\CoachingRepository;
 use App\Repository\VideosRepository;
 use App\Repository\UserRepository;
@@ -60,7 +60,7 @@ final class AdminController extends AbstractController
     {
         $video = $videosRepository->find($id);
 
-        $form = $this->createForm(VideoType::class, $video);
+        $form = $this->createForm(EditVideoType::class, $video);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -80,7 +80,7 @@ final class AdminController extends AbstractController
     {
         $video = new \App\Entity\Videos();
 
-        $form = $this->createForm(\App\Form\VideoType::class, $video);
+        $form = $this->createForm(\App\Form\EditVideoType::class, $video);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
