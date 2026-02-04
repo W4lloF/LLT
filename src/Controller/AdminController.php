@@ -48,9 +48,10 @@ final class AdminController extends AbstractController
     {
         $video = $videosRepository->find($id);
 
-        $em->remove($video);
-        $em->flush();
-
+        if ($video) {
+            $em->remove($video);
+            $em->flush();
+        }
         return $this->redirectToRoute('app_videolist');
     }
 
@@ -116,14 +117,13 @@ final class AdminController extends AbstractController
 
 
     #[Route('/admin/videodelete/choose', name: 'app_videogetid_delete')]
-    public function getIDVideoDelete(Request $request, VideosRepository $videosRepository, EntityManagerInterface $em): Response
+    public function getIDVideoDelete(Request $request): Response
     {
         $form = $this->createForm(\App\Form\GetIDVideoType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $id = $form->getData()['id'];
-            $video = $videosRepository->find($id);
 
             return $this->redirectToRoute('app_videodelete', ['id' => $id]);
         }
@@ -240,7 +240,20 @@ final class AdminController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_coachingslist');
+        return $this->redirectToRoute('app_home');
+    }
+
+    #[Route('/admin/coachingsdone/{id}', name: 'app_coachingsdone')]
+    public function Coachingdone(int $id, CoachingRepository $coachingRepository, EntityManagerInterface $em): Response
+    {
+        $coaching = $coachingRepository->find($id);
+
+        if ($coaching && $coaching->getStatus() === 'accepted') {
+            $coaching->setStatus('done');
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('app_home');
     }
 
     #[Route('/admin/coachings/delete/choose', name: 'app_getcoachingid_delete')]
@@ -268,6 +281,6 @@ final class AdminController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('app_coachinglist');
+        return $this->redirectToRoute('app_home');
     }
 }

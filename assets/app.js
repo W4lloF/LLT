@@ -1,7 +1,7 @@
 import './stimulus_bootstrap.js';
 import './styles/app.css';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('turbo:load', () => {
     const open = document.querySelector(".menu-small-btn");
     const close = document.querySelector(".close");
     const menuul = document.querySelector(".menu-small-ul");
@@ -49,7 +49,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 move();
             }
         });
-
-        move();
     }
 });

@@ -78,7 +78,7 @@ final class CoachingController extends AbstractController
             $em->persist($coaching);
             $em->flush();
 
-            return $this->redirectToRoute('app_profile');
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('coaching/booking.html.twig', [

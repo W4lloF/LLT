@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Historique coaching{% endblock %}
 
 {% block body %}
 <section class="table-section">
@@ -20,11 +20,7 @@
             </thead>
 
             <tbody>
-                {% set donecoaching = false %}
-
                 {% for coaching in coachings %}
-                {% if coaching.status == 'done' %}
-                {% set donecoaching = true %}
                 <tr>
                     <td>{{ coaching.coach.user.username }}</td>
                     <td>{{ coaching.coachingType }}</td>
@@ -33,14 +29,11 @@
                     <td>{{ coaching.datetime|date('Y') }}</td>
                     <td>{{ coaching.datetime|date('H:i') }}</td>
                 </tr>
-                {% endif %}
-                {% endfor %}
-
-                {% if not donecoaching %}
+                {% else %}
                 <tr>
                     <td colspan="6">Aucun coaching terminé pour le moment.</td>
                 </tr>
-                {% endif %}
+                {% endfor %}
             </tbody>
         </table>
     </div>

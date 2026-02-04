@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Form\ProfileEditType;
 use App\Entity\User;
+use App\Repository\CoachingRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -69,7 +70,7 @@ final class ProfileController extends AbstractController
         /** @var \App\Entity\User|null $user */
         $user = $this->getUser();
 
-        $coachings = $user ? $user->getCoachings() : [];
+        $coachings = $user->getCoachings()->filter(fn($c) => $c->getStatus() === 'done');
 
         return $this->render('profile/history.html.twig', [
             'coachings' => $coachings,
@@ -87,7 +88,7 @@ final class ProfileController extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
-        $coachings = $user->getCoachings();
+        $coachings = $user->getCoachings()->filter(fn($c) => in_array($c->getStatus(), ['waiting', 'accepted']));
 
         return $this->render('profile/coachings.html.twig', [
             'coachings' => $coachings,
@@ -175,7 +176,7 @@ final class ProfileController extends AbstractController
         ]);
     }
     #[Route('/profile/coach/feedbacks', name: 'app_coachfeedbacks')]
-    public function coachFeedbacks(EntityManagerInterface $em): Response
+    public function coachFeedbacks(): Response
     {
         /** @var \App\Entity\User $userConnected */
         $userConnected = $this->getUser();
@@ -188,13 +189,13 @@ final class ProfileController extends AbstractController
         ]);
     }
     #[Route('/profile/coach/coachings', name: 'app_coachcoachings')]
-    public function coachCoachings(EntityManagerInterface $em): Response
+    public function coachCoachings(): Response
     {
         /** @var \App\Entity\User $userConnected */
         $userConnected = $this->getUser();
         $coach = $userConnected->getCoach();
 
-        $coachings = $coach->getCoachings()->filter(fn($c) => $c->getStatus() === 'waiting');
+        $coachings = $coach->getCoachings()->filter(fn($c) => in_array($c->getStatus(), ['waiting', 'accepted']));
 
         return $this->render('profile/coachcoachings.html.twig', [
             'coachings' => $coachings,
@@ -212,11 +213,7 @@ final class ProfileController extends AbstractController
 
         $coach = $user->getCoach();
 
-        if ($coach) {
-            $coachings = $coach->getCoachings()->filter(fn($c) => $c->getStatus() === 'done');
-        } else {
-            $coachings = [];
-        }
+        $coachings = $coach->getCoachings()->filter(fn($c) => $c->getStatus() === 'done');
 
         return $this->render('profile/coachhistory.html.twig', [
             'coachings' => $coachings,

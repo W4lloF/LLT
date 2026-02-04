@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes demandes en attente{% endblock %}
+{% block title %}Mes demandes{% endblock %}
 
 {% block body %}
 <section class="table-section">
-    <h2>Demandes en attente</h2>
+    <h2>Demandes</h2>
 
     <div class="table-card">
         <table class="table">
@@ -20,27 +20,37 @@
             </thead>
             <tbody>
                 {% for coaching in coachings %}
-                    <tr>
-                        <td>{{ coaching.id }}</td>
-                        <td>{{ coaching.user.username }}</td>
-                        <td>{{ coaching.coachingtype }}</td>
-                        <td>{{ coaching.datetime ? coaching.datetime|date('d/m/Y H:i') : '-' }}</td>
-                        <td>
-                            <a href="{{ path('app_coachingsaccept', {'id': coaching.id}) }}" class="btn btn-border">
-                                Accepter
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{{ path('app_coachingsdelete', {'id': coaching.id}) }}" class="btn"
-                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');">
-                               Supprimer
-                            </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{ coaching.id }}</td>
+                    <td>{{ coaching.user.username }}</td>
+                    <td>{{ coaching.coachingtype }}</td>
+                    <td>{{ coaching.datetime ? coaching.datetime|date('d/m/Y H:i') : '-' }}</td>
+                    <td>
+                        {% if coaching.status == 'waiting' %}
+                        <a href="{{ path('app_coachingsaccept', {'id': coaching.id}) }}" class="btn btn-border">
+                            Accepter
+                        </a>
+                        {% elseif coaching.status == 'accepted' %}
+                        En attente
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if coaching.status == 'waiting' %}
+                        <a href="{{ path('app_coachingsdelete', {'id': coaching.id}) }}" class="btn"
+                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');">
+                            Supprimer
+                        </a>
+                        {% elseif coaching.status == 'accepted' %}
+                        <a href="{{ path('app_coachingsdone', {'id': coaching.id}) }}" class="btn btn-border">
+                            Terminer
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
                 {% else %}
-                    <tr>
-                        <td colspan="6">Aucune demande en attente</td>
-                    </tr>
+                <tr>
+                    <td colspan="6">Aucune demande en attente</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>

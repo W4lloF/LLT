@@ -29,6 +29,9 @@ security:
         - { path: ^/profile/coachings, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/profile/coach, roles: [ROLE_COACH, ROLE_ADMIN] }
         - { path: ^/admin/videolist/add, roles: [ROLE_COACH, ROLE_ADMIN] }
+        - { path: ^/admin/coachingsdelete, roles: [ROLE_COACH, ROLE_ADMIN] }
+        - { path: ^/admin/coachingsdone, roles: [ROLE_COACH, ROLE_ADMIN] }
+        - { path: ^/admin/coachingsaccept, roles: [ROLE_COACH, ROLE_ADMIN] }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: IS_AUTHENTICATED_FULLY }
 

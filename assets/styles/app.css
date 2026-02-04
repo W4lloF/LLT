@@ -165,8 +165,8 @@ h3 {
 }
 
 .subscription-text {
-    font-size: 48px;
-    width: 30vw;
+    font-size: 32px;
+    width: 35vw;
 }
 
 p {
@@ -210,7 +210,7 @@ label {
 
 .card-sub {
     min-width: 25vw;
-    height: 55vh;
+    min-height: 55vh;
 }
 
 .video {
@@ -270,7 +270,7 @@ label {
     border: 1px solid #fff;
 }
 
-.img-background-coaching{
+.img-background-coaching {
     width: 35%;
 }
 
@@ -511,6 +511,9 @@ option {
 .video-planning {
     width: 40%;
 }
+.video-planning iframe {
+    border: 0;
+}
 
 /* Subscription */
 .sub-div,
@@ -521,6 +524,7 @@ option {
 
 .sub-div {
     padding: 1.5rem 1rem;
+    flex-wrap: nowrap;
 }
 
 /* Profil */
@@ -545,7 +549,7 @@ option {
     }
 
     .subscription-text {
-        font-size: 32px;
+        font-size: 24px;
     }
 
     .btn-global {
@@ -717,6 +721,10 @@ option {
 
 /* Téléphone */
 @media (max-width: 530px) {
+    .btn-sub {
+        font-size: 24px;
+    }
+
     .btn-global {
         font-size: 16px;
     }
@@ -744,7 +752,7 @@ option {
     }
 
     .subscription-text {
-        font-size: 20px;
+        font-size: 16px;
         width: 60%;
     }
 
@@ -841,5 +849,9 @@ option {
 
     .menu-small-ul {
         width: 65%;
+    }
+
+    .ul-content {
+        gap: 0.5rem;
     }
 }
